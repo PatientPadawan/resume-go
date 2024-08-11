@@ -1,8 +1,0 @@
-<header class=\"flex flex-col items-center\"><nav class=\"p-1\"><ul class=\"flex flex-row space-x-4\"><li><a href=\"#\">Portfolio</a></li><li><a href=\"#\">LinkedIn</a></li><li><a href=\"#\">GitHub</a></li></ul></nav><button>Printable Version</button><h1 class=\"text-2xl p-2\">Alex M Braden</h1><hr><p>hello</p><p>I'm software engineer with a passion for building scalable, maintainable, and performant applications that drive business value and make customers happy. I have experience working with a variety of technologies,  including Go, TypeScript, and Python and am eager to learn more. </p><hr></header>
-<div></div>
-<div></div>
-<div></div>
-<div></div>
-<body class=\"flex flex-col h-full bg-light dark:bg-dark text-light dark:text-dark\">
-<main>
-</main></body>
