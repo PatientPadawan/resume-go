@@ -1,0 +1,35 @@
+package templates
+
+templ Head(title string) {
+	<head>
+		<title>{ title }</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script src="static/script/htmx.min.js"></script>
+		<script src="static/script/response-targets.js"></script>
+		<script>
+			// Check for dark mode preference
+			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+			} else {
+        document.documentElement.classList.remove('dark')
+			}
+
+			// Function to toggle dark mode
+			function toggleDarkMode() {
+        if (document.documentElement.classList.contains('dark')) {
+          document.documentElement.classList.remove('dark')
+          localStorage.theme = 'light'
+        } else {
+          document.documentElement.classList.add('dark')
+          localStorage.theme = 'dark'
+        }
+			}
+		</script>
+		if os.Getenv("env") == "production" {
+			<link rel="stylesheet" href="static/css/style.min.css"/>
+		} else {
+			<link rel="stylesheet" href="static/css/style.css"/>
+		}
+	</head>
+}

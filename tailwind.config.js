@@ -1,0 +1,29 @@
+const colors = require("tailwindcss/colors");
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["internal/templates/*.templ"],
+  theme: {
+    extend: {
+      colors: {
+        "floral-white": "#FFFAF0",
+        "soft-blue": "#A0C4FF",
+        "coral": "#FF7F50",
+        "dark-navy": "#1A2A40",
+        "muted-blue": "#4A6FA5",
+        "muted-coral": "#E76F51",
+        "vd-blue": "#0F172A",
+      },
+      backgroundColor: {
+        'light': '#FFFAF0', // floral-white
+        'dark': '#0F172A',  // vd-blue
+      },
+      textColor: {
+        'light': '#1A2A40', // dark-navy
+        'dark': '#FFFAF0',  // floral-white
+      },
+    },
+  },
+  darkMode: "class",
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+};
