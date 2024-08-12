@@ -19,8 +19,8 @@ module.exports = {
         'dark': '#0F172A',  // vd-blue
       },
       textColor: {
-        'light': '#1A2A40', // dark-navy
-        'dark': '#FFFAF0',  // floral-white
+        'dim': '#1A2A40', // dark-navy
+        'lite': '#FFFAF0',  // floral-white
       },
     },
   },

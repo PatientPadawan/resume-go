@@ -12,7 +12,7 @@ templ-generate:
 
 .PHONY: templ-watch
 templ-watch:
-	templ generate --watch
+	templ generate --watch --proxy="http://localhost:4000" --cmd="go run ./cmd/main.go"
 	
 .PHONY: dev
 dev:

@@ -13,7 +13,7 @@ templ skills() {
 }
 
 templ footer() {
-	<section>
+	<section class="mx-auto">
 		// TODO: Implement PDF print
 		<button class="text-sm">printable version</button>
 	</section>
@@ -21,7 +21,7 @@ templ footer() {
 
 templ Layout() {
 	@Head("Padawan Resume")
-	<body class="flex flex-col h-full bg-light dark:bg-dark text-light dark:text-dark">
+	<body class="flex flex-col h-full bg-light dark:bg-dark text-dim dark:text-lite">
 		@Header()
 		<main>
 			@Experience()
