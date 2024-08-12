@@ -1,0 +1,17 @@
+package templates
+
+templ Card(title string, subtitle string, dates string) {
+  <div class="w-5/6 bg-light dark:bg-gray-700 border-2 border-coral dark:border-soft-blue rounded-md px-4 py-2 my-4 list-none group">
+    <div class="flex flex-col">
+      <h3 class="text-xl text-dim dark:text-lite">
+        { title }
+      </h3>
+      <h4 class="text-md text-slate-400 dark:text-slate-400">
+        { subtitle }
+      </h4>
+      <p class="text-xs text-slate-400 dark:text-slate-400">
+        { dates }
+      </p>
+    </div>
+  </div>
+}

@@ -1,0 +1,9 @@
+package templates
+
+templ Pill(list []string) {
+  for _, item := range list {
+    <span class="px-3 py-1 m-1 text-sm font-semibold text-dim dark:text-lite !bg-muted-blue dark:bg-soft-blue rounded-full transition-colors hover:bg-coral dark:hover:bg-muted-coral">
+      { item }
+    </span>
+  }
+}

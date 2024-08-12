@@ -1,0 +1,45 @@
+package templates
+
+import c "goth/internal/templates/components"
+
+templ Skills() {
+  <section class="flex flex-col items-center w-full">
+    @c.SectionHead("Skills")
+    @c.Pill(
+      []string{
+        "Javascript",
+        "Typescript",
+        "Python",
+        "Go",
+        "C",
+        "React",
+        "Next.js",
+        "Node.js",
+        "Express.js",
+        "Tailwind CSS",
+        "HTML",
+        "CSS",
+        "Git",
+        "GitHub",
+        "Jira",
+        "Postman",
+        "Figma",
+        "Angular",
+        "Svelte",
+        "Zustand",
+        "Redux",
+        "MongoDB",
+        "PostgreSQL",
+        "GraqhQL",
+        "GSAP",
+        "Matplotlib",
+        "Seaborn",
+        "Pandas",
+        "NumPy",
+        "Scikit-learn",
+        "TensorFlow",
+        "PyTorch",
+      },
+    )
+  </section>
+}
