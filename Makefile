@@ -35,3 +35,10 @@ staticcheck:
 .PHONY: test
 test:
 	  go test -race -v -timeout 30s ./...
+.PHONY: killall
+killall:
+	@echo "Stopping all development processes..."
+	-killall templ
+	-killall air
+	-killall tailwindcss
+	@echo "All processes stopped."
