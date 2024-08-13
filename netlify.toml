@@ -2,6 +2,8 @@
   command = """
     chmod +x ./tailwindcss
     go mod download
+    go install github.com/a-h/templ/cmd/templ@latest
+    export PATH=$PATH:$(go env GOPATH)/bin
     make build-netlify
   """
   publish = "public"

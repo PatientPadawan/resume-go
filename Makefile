@@ -53,7 +53,9 @@ templ-generate: check-go-version install-templ
 	templ generate
 
 .PHONY: build-netlify
-build-netlify: check-go-version install-templ
+build-netlify: 
+	check-go-version 
+	install-templ
 	./tailwindcss -i ./static/css/input.css -o ./static/css/style.min.css --minify
 	make templ-generate
 	go build -ldflags "-X main.Environment=production" -o ./bin/$(APP_NAME) ./cmd/$(APP_NAME)/main.go
