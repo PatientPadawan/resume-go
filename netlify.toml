@@ -9,6 +9,3 @@
     make build-netlify
   """
   publish = "public"
-
-[build.environment]
-  GO_VERSION = "1.22.6"
