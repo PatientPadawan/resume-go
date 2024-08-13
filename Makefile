@@ -8,6 +8,7 @@ tailwind-build:
 
 .PHONY: templ-generate
 templ-generate:
+	@which templ > /dev/null || (echo "templ is not installed. Please run 'go install github.com/a-h/templ/cmd/templ@latest'" && exit 1)
 	templ generate
 
 .PHONY: templ-watch
