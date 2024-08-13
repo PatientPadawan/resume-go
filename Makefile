@@ -40,22 +40,17 @@ killall:
 	-killall tailwindcss
 	@echo "All processes stopped."
 
-.PHONY: check-go-version
-check-go-version:
-	@go version | grep -q 'go1.22' || (echo "Incorrect Go version. Please use Go 1.22" && exit 1)
-
 .PHONY: install-templ
 install-templ:
 	@which templ > /dev/null || go install github.com/a-h/templ/cmd/templ@latest
 
 .PHONY: templ-generate
-templ-generate: check-go-version install-templ
+templ-generate:
+	install-templ
 	templ generate
 
 .PHONY: build-netlify
 build-netlify: 
-	check-go-version 
-	install-templ
 	./tailwindcss -i ./static/css/input.css -o ./static/css/style.min.css --minify
 	make templ-generate
 	go build -ldflags "-X main.Environment=production" -o ./bin/$(APP_NAME) ./cmd/$(APP_NAME)/main.go
