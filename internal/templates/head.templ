@@ -1,39 +1,59 @@
 package templates
 
 import (
-	"os"
+"os"
 )
 
 templ Head(title string) {
 	<head>
-		<title>{ title }</title>
-		<meta charset="UTF-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<script src="static/script/htmx.min.js"></script>
-		<script src="static/script/response-targets.js"></script>
-		<script>
-			// Check for dark mode preference
-			if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-			} else {
-        document.documentElement.classList.remove('dark')
-			}
-
-			// Function to toggle dark mode
-			function toggleDarkMode() {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark')
-          localStorage.theme = 'light'
-        } else {
-          document.documentElement.classList.add('dark')
-          localStorage.theme = 'dark'
-        }
-			}
+   <title>{ title }</title>
+   <meta charset="UTF-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <script src="static/script/htmx.min.js"></script>
+   <script src="static/script/response-targets.js"></script>
+   <script>
+      // Check for dark mode preference
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark')
+      } else {
+				document.documentElement.classList.remove('dark')
+      }
+      
+      // Toggle dark mode
+      function toggleDarkMode() {
+				if (document.documentElement.classList.contains('dark')) {
+					document.documentElement.classList.remove('dark')
+					localStorage.theme = 'light'
+				} else {
+					document.documentElement.classList.add('dark')
+					localStorage.theme = 'dark'
+				}
+      }
+   </script>
+   <script>
+	 		// Print resume button
+			document.addEventListener('DOMContentLoaded', function() {
+				var printButton = document.getElementById('printButton');
+				if (printButton) {
+					printButton.addEventListener('click', function() {
+						var printWindow = window.open('/print', '_blank');
+						if (printWindow) {
+							printWindow.onload = function() {
+								printWindow.print();
+							};
+						} else {
+							alert('Please allow popups for this website to print your resume.');
+						}
+					});
+				} else {
+						console.error('Print button not found');
+					}
+			});
 		</script>
 		if os.Getenv("env") == "production" {
 			<link rel="stylesheet" href="static/css/style.min.css"/>
 		} else {
-			<link rel="stylesheet" href="static/css/style.css"/>
+   		<link rel="stylesheet" href="static/css/style.css"/>
 		}
 	</head>
 }

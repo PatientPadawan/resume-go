@@ -41,6 +41,7 @@ func main() {
 		)
 
 		r.Get("/", handlers.NewHomeHandler().ServeHTTP)
+		r.Get("/print", handlers.NewPrintHandler().ServeHTTP)
 	})
 
 	killSig := make(chan os.Signal, 1)
