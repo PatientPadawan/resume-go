@@ -6,4 +6,3 @@
     export PATH=$PATH:$(go env GOPATH)/bin
     make build-netlify
   """
-  publish = "public"
