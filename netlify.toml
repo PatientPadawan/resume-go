@@ -1,15 +1,10 @@
+[build.environment]
+  GO_VERSION = "1.22"
+  
 [build]
   command = """
-    curl -sL https://git.io/g-install | bash -s -- -b $HOME/bin 1.22
-    export PATH=$HOME/bin:$PATH
-    go version
     chmod +x ./tailwindcss
     go mod download
-    GOBIN=$HOME/bin go install github.com/a-h/templ/cmd/templ@latest
-    export PATH=$PATH:$HOME/bin
     make build-netlify
   """
   publish = "public"
-
-[build.environment]
-  GO_VERSION = "1.22"
