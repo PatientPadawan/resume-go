@@ -45,12 +45,11 @@ install-templ:
 	@which templ > /dev/null || go install github.com/a-h/templ/cmd/templ@latest
 
 .PHONY: templ-generate
-templ-generate:
-	install-templ
+templ-generate: install-templ
 	templ generate
 
 .PHONY: build-netlify
-build-netlify: 
+build-netlify:
 	./tailwindcss -i ./static/css/input.css -o ./static/css/style.min.css --minify
 	make templ-generate
 	go build -ldflags "-X main.Environment=production" -o ./bin/$(APP_NAME) ./cmd/$(APP_NAME)/main.go
