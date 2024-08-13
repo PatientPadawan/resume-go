@@ -1,9 +1,12 @@
 [build]
   command = """
     chmod +x ./tailwindcss
+    go mod download
+    go install github.com/a-h/templ/cmd/templ@latest
+    export PATH=$PATH:$HOME/go/bin
     make build-netlify
   """
   publish = "public"
 
 [build.environment]
-  GO_VERSION = "1.22.6"
+  GO_VERSION = "1.22"
