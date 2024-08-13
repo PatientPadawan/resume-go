@@ -1,9 +1,9 @@
 package templates
 
 templ Pill(list []string) {
-  <div class="flex flex-wrap gap-2 w-5/6 py-4">
+  <div class="flex flex-wrap gap-2 w-5/6 xl:w-3/4 py-4">
     for _, item := range list {
-      <span class="inline-block px-3 py-1 text-sm font-semibold text-dim dark:text-lite bg-coral dark:bg-soft-blue rounded-full transition-colors hover:bg-muted-blue dark:hover:bg-muted-coral">
+      <span class="inline-block px-3 py-1 text-sm lg:text-md xl:text-lg font-semibold text-dim dark:text-lite bg-coral dark:bg-soft-blue rounded-full transition-colors hover:bg-muted-blue dark:hover:bg-muted-coral">
         { item }
       </span>
     }

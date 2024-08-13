@@ -1,26 +1,26 @@
 package templates
 
 templ Details(title string, subtitle string, desc []string, dates string) {
-  <details class="w-5/6 bg-light dark:bg-gray-700 border-2 border-muted-blue dark:border-soft-blue rounded-md px-4 py-2 my-4 group">
+  <details class="w-5/6 xl:w-3/4 bg-light dark:bg-gray-700 border-2 border-muted-blue dark:border-soft-blue rounded-md px-4 py-2 my-4 hover:border-coral dark:hover:border-muted-coral group">
     <summary class="cursor-pointer list-none">
         <div class="flex flex-col">
-          <h3 class="text-xl text-dim dark:text-lite">
+          <h3 class="text-xl text-dim dark:text-lite xl:text-2xl">
             { title }
           </h3>
           <div class="flex justify-between items-center">
-              <h4 class="text-md text-slate-500 dark:text-slate-400">
+              <h4 class="text-md text-slate-500 dark:text-slate-400 lg:text-lg xl:text-xl">
                 { subtitle }
               </h4>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 transform transition-transform group-open:rotate-180">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
               </svg>
           </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400">
+          <p class="text-xs text-slate-500 dark:text-slate-400 lg:text-md xl:text-lg">
             { dates }
           </p>
         </div>
     </summary>
-    <div class="bg-[#B0C4DE] dark:bg-gray-900 rounded-md text-dim dark:text-lite text-sm mt-4 border border-black">
+    <div class="bg-[#B0C4DE] dark:bg-gray-900 rounded-md text-dim dark:text-lite text-sm mt-4 border border-black lg:text-lg">
         <ul class="list-disc space-y-2 p-4 pl-6">
           for _, item := range desc {
             <li>

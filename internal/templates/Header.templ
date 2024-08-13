@@ -3,20 +3,20 @@ package templates
 templ Header() {
 	<header class="flex flex-col items-center">
 		<nav class="pt-2">
-			<ul class="flex flex-row space-x-12 text-sm">
-				<li><a target="_blank" rel="noopener noreferrer" href="https://patientpadawanportfolio.vercel.app/">Portfolio</a></li>
-				<li><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/alexmbraden/">LinkedIn</a></li>
-				<li><a target="_blank" rel="noopener noreferrer" href="https://github.com/PatientPadawan">GitHub</a></li>
+			<ul class="flex flex-row space-x-12 text-sm md:space-x-24 lg:space-x-40 xl:space-x-60 lg:text-md xl:text-lg">
+				<li class="hover:text-coral dark:hover:text-muted-coral"><a target="_blank" rel="noopener noreferrer" href="https://patientpadawanportfolio.vercel.app/">Portfolio</a></li>
+				<li class="hover:text-coral dark:hover:text-muted-coral"><a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/alexmbraden/">LinkedIn</a></li>
+				<li class="hover:text-coral dark:hover:text-muted-coral"><a target="_blank" rel="noopener noreferrer" href="https://github.com/PatientPadawan">GitHub</a></li>
 			</ul>
 		</nav>
-		<h1 class="text-4xl pt-4 pb-2">Alex Braden</h1>
-		<hr class="my-4 h-2 w-5/6 border-muted-blue dark:border-soft-blue"/>
-		<p class="w-5/6">
+		<h1 class="text-4xl pt-4 pb-2 md:text-5xl md:pt-8 md:pb-4 xl:text-6xl xl:pt-16 xl:pb-8">Alex Braden</h1>
+		<hr class="my-4 h-2 w-5/6 xl:w-3/4 border-muted-blue dark:border-soft-blue"/>
+		<p class="w-5/6 xl:w-3/4 lg:text-lg xl:text-xl">
 			💻 I'm a software engineer with a passion for building scalable,
 			maintainable, and performant applications that drive business value and make
 			customers happy. I have experience working with a variety of technologies, 
 			including Go, TypeScript, and Python and am eager to learn more. 
 		</p>
-		<hr class="my-4 h-2 w-5/6 border-muted-blue dark:border-soft-blue"/>
+		<hr class="my-4 h-2 w-5/6 xl:w-3/4 border-muted-blue dark:border-soft-blue"/>
 	</header>
 }
