@@ -5,6 +5,8 @@ import (
 	"errors"
 	"goth/internal/config"
 	"goth/internal/handlers"
+	"goth/internal/staticgen"
+	"log"
 	"log/slog"
 	"net/http"
 	"os"
@@ -24,9 +26,22 @@ var Environment = "development"
 
 func init() {
 	os.Setenv("env", Environment)
+	os.Setenv("GENERATE_STATIC", "true") // used for local testing of staticgen
 }
 
-func main() {
+func isProductionBuild() bool {
+	if os.Getenv("GENERATE_STATIC") == "true" {
+		return true
+	}
+	// revisit
+	if os.Getenv("CI") == "true" {
+		return true
+	}
+
+	return false
+}
+
+func runServer() {
 	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 	r := chi.NewRouter()
 
@@ -80,4 +95,17 @@ func main() {
 	}
 
 	logger.Info("Server shutdown complete")
+}
+
+func main() {
+	if isProductionBuild() {
+		// Generate static files for production deployment
+		err := staticgen.GenerateStaticFiles("../public")
+		if err != nil {
+			log.Fatalf("Failed to generate static files: %v", err)
+		}
+	} else {
+		// Run your normal server for local development
+		runServer()
+	}
 }
