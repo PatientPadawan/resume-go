@@ -35,14 +35,22 @@ templ Head(title string) {
 			document.addEventListener('DOMContentLoaded', function() {
 				var printButton = document.getElementById('printButton');
 				if (printButton) {
-					printButton.addEventListener('click', function() {
-						var printWindow = window.open('/print', '_blank');
-						if (printWindow) {
-							printWindow.onload = function() {
+					printButton.addEventListener('click', async function() {
+						 try {
+							const response = await fetch('/api/print');
+							if (response.ok) {
+								const html = await response.text();
+								// Open a new window with the printable content
+								const printWindow = window.open('', '_blank');
+								printWindow.document.write(html);
+								printWindow.document.close();
+								// Trigger print dialog
 								printWindow.print();
-							};
-						} else {
-							alert('Please allow popups for this website to print your resume.');
+							} else {
+								console.error('Print request failed');
+							}
+						} catch (error) {
+							console.error('Error:', error);
 						}
 					});
 				} else {
@@ -55,5 +63,6 @@ templ Head(title string) {
 		} else {
    		<link rel="stylesheet" href="static/css/style.css"/>
 		}
+		<link rel="icon" type="image/x-icon" href="/static/favicon.ico">
 	</head>
 }

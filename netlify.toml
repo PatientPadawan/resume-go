@@ -6,5 +6,18 @@
     export PATH=$PATH:$(go env GOPATH)/bin
     make build-netlify
     cp -r static public/
+    mkdir -p functions/static
+    cp static/Print-resume.html functions/static/
+    go get github.com/aws/aws-lambda-go/events
+    go get github.com/aws/aws-lambda-go/lambda
+    go build -o functions/print ./functions/print.go
   """
   publish = "public"
+  functions = "functions"
+
+[[
+redirects
+]]
+  from = "/api/print"
+  to = "/.netlify/functions/print"
+  status = 200
