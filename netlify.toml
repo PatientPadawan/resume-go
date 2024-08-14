@@ -3,10 +3,9 @@
     chmod +x ./tailwindcss
     go mod download
     go install github.com/a-h/templ/cmd/templ@latest
-    export PATH=$PATH:$(go env GOPATH)/bin
     make build-netlify
     cp -r static public/
-    mkdir -p functions/static
+    cp static/favicon.ico public/favicon.ico
     go get github.com/aws/aws-lambda-go/events
     go get github.com/aws/aws-lambda-go/lambda
     go build -o functions/print ./functions/print.go
