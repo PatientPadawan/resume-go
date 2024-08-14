@@ -11,7 +11,7 @@ import (
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// Parse the template
-	tmpl, err := template.ParseFiles("static/print-resume.html")
+	tmpl, err := template.ParseFiles("print-resume.html")
 	if err != nil {
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusInternalServerError,
