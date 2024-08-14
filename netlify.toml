@@ -15,6 +15,6 @@
   functions = "functions"
 
 [[redirects]]
-  from = "/print"
+  from = "/api/print"
   to = "/.netlify/functions/print"
   status = 200
