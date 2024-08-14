@@ -1,4 +1,4 @@
-# Project Name
+# Resume in Go
 
 This project is a web application that generates static HTML using TailwindCSS and templ, with a backend written in Go.
 
