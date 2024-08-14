@@ -15,7 +15,7 @@
   publish = "public"
   functions = "functions"
 
-[redirects]
+[[redirects]]
   from = "/api/print"
   to = "/.netlify/functions/print"
   status = 200
