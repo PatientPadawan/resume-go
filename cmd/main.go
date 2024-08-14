@@ -26,7 +26,7 @@ var Environment = "production"
 
 func init() {
 	os.Setenv("env", Environment)
-	os.Setenv("GENERATE_STATIC", "true") // used for local testing of staticgen
+	// os.Setenv("GENERATE_STATIC", "true") // used for local testing of staticgen
 }
 
 func isProductionBuild() bool {
