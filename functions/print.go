@@ -2,36 +2,244 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"html/template"
 	"net/http"
-	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	// Check if the file exists
-	templatePath := "public/static/print-resume.html"
-	_, err := os.Stat(templatePath)
-	if os.IsNotExist(err) {
-		errorMsg := fmt.Sprintf("Template file not found: %s", templatePath)
-		fmt.Println(errorMsg) // This will appear in the Netlify function logs
-		return events.APIGatewayProxyResponse{
-			StatusCode: http.StatusInternalServerError,
-			Body:       errorMsg,
-		}, nil
-	}
+const htmlTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex M Braden Resume</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 10px;
+      }
+      h2 {
+        color: #3498db;
+        margin-top: 20px;
+      }
+      .job,
+      .education,
+      .certification {
+        margin-bottom: 20px;
+      }
+      .job-title,
+      .degree,
+      .cert-name {
+        font-weight: bold;
+      }
+      .job-company,
+      .school-name,
+      .cert-provider {
+        font-style: italic;
+      }
+      .job-date,
+      .edu-date,
+      .cert-date {
+        float: right;
+        color: #7f8c8d;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      .skills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .skill {
+        background-color: #ecf0f1;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Alex M Braden</h1>
 
+    <h2>Experience</h2>
+    <div class="job">
+      <div class="job-title">Full-stack Developer</div>
+      <div class="job-company">
+        Data Annotation <span class="job-date">March, 2024 - Present</span>
+      </div>
+      <ul>
+        <li>
+          Implemented Reinforcement Learning and Human Feedback (RLHF)
+          techniques to train AI models for coding tasks, improving accuracy and
+          performance.
+        </li>
+        <li>
+          Contributed to the development of AI models for coding applications,
+          advancing automated coding assistance, and enhancing developer
+          productivity.
+        </li>
+        <li>
+          Utilized Python, TypeScript, and React documentation to develop and
+          maintain internal tools and libraries, streamlining development
+          processes, and improving efficiency.
+        </li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-title">Full-stack Developer</div>
+      <div class="job-company">
+        Patient Padawan Design
+        <span class="job-date">January, 2023 - Present</span>
+      </div>
+      <ul>
+        <li>
+          Designed user-focused, creative interfaces for websites, emphasizing
+          usability.
+        </li>
+        <li>
+          Implemented responsive design techniques, ensuring cross-device
+          compatibility
+        </li>
+        <li>
+          Integrated third-party APIs into web applications to enhance
+          functionality
+        </li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-title">Junior Web Developer</div>
+      <div class="job-company">
+        Rebels Repairs
+        <span class="job-date">August, 2021 - January, 2023</span>
+      </div>
+      <ul>
+        <li>
+          Led the development and deployment of the company's first website,
+          establishing a robust online presence.
+        </li>
+        <li>
+          Prepared reports on website metrics, utilization rates, and other key
+          information.
+        </li>
+        <li>
+          Conducted user training sessions on new software applications and
+          hardware devices.
+        </li>
+      </ul>
+    </div>
+
+    <h2>Education</h2>
+    <div class="education">
+      <div class="degree">Bachelor of Science</div>
+      <div class="school-name">
+        Arizona State University <span class="edu-date">May, 2018</span>
+      </div>
+      <ul>
+        <li>Magna Cum Laude</li>
+        <li>3.7/4.0 GPA</li>
+        <li>
+          Served as President of Phi Upsilon Omicron National Honor Society
+        </li>
+      </ul>
+    </div>
+
+    <div class="education">
+      <div class="degree">Associate of Science</div>
+      <div class="school-name">
+        Mesa Community College <span class="edu-date">May, 2016</span>
+      </div>
+      <ul>
+        <li>3.6/4.0 GPA</li>
+      </ul>
+    </div>
+
+    <h2>Certifications</h2>
+    <div class="certification">
+      <div class="cert-name">Data Visualization</div>
+      <div class="cert-provider">
+        Freecodecamp.org <span class="cert-date">April, 2024</span>
+      </div>
+    </div>
+    <div class="certification">
+      <div class="cert-name">Front End Development Libraries</div>
+      <div class="cert-provider">
+        Freecodecamp.org <span class="cert-date">February, 2024</span>
+      </div>
+    </div>
+    <div class="certification">
+      <div class="cert-name">JavaScript Algorithms and Data Structures</div>
+      <div class="cert-provider">
+        Freecodecamp.org <span class="cert-date">December, 2023</span>
+      </div>
+    </div>
+    <div class="certification">
+      <div class="cert-name">Responsive Web Design</div>
+      <div class="cert-provider">
+        Freecodecamp.org <span class="cert-date">October, 2023</span>
+      </div>
+    </div>
+
+    <h2>Skills</h2>
+    <div class="skills">
+      <span class="skill">Javascript</span>
+      <span class="skill">Typescript</span>
+      <span class="skill">Python</span>
+      <span class="skill">Go</span>
+      <span class="skill">C</span>
+      <span class="skill">React</span>
+      <span class="skill">Next.js</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">Express.js</span>
+      <span class="skill">Tailwind CSS</span>
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">Git</span>
+      <span class="skill">GitHub</span>
+      <span class="skill">Jira</span>
+      <span class="skill">Postman</span>
+      <span class="skill">Figma</span>
+      <span class="skill">Angular</span>
+      <span class="skill">Svelte</span>
+      <span class="skill">Zustand</span>
+      <span class="skill">Redux</span>
+      <span class="skill">MongoDB</span>
+      <span class="skill">PostgreSQL</span>
+      <span class="skill">GraphQL</span>
+      <span class="skill">GSAP</span>
+      <span class="skill">Matplotlib</span>
+      <span class="skill">Seaborn</span>
+      <span class="skill">Pandas</span>
+      <span class="skill">NumPy</span>
+      <span class="skill">Scikit-learn</span>
+      <span class="skill">TensorFlow</span>
+      <span class="skill">PyTorch</span>
+    </div>
+  </body>
+</html>
+`
+
+func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// Parse the template
-	tmpl, err := template.ParseFiles(templatePath)
+	tmpl, err := template.New("resume").Parse(htmlTemplate)
 	if err != nil {
-		errorMsg := fmt.Sprintf("Error parsing template: %v", err)
-		fmt.Println(errorMsg) // This will appear in the Netlify function logs
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusInternalServerError,
-			Body:       errorMsg,
+			Body:       "Error parsing template: " + err.Error(),
 		}, nil
 	}
 
@@ -39,11 +247,9 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	var buf bytes.Buffer
 	err = tmpl.Execute(&buf, nil)
 	if err != nil {
-		errorMsg := fmt.Sprintf("Error executing template: %v", err)
-		fmt.Println(errorMsg) // This will appear in the Netlify function logs
 		return events.APIGatewayProxyResponse{
 			StatusCode: http.StatusInternalServerError,
-			Body:       errorMsg,
+			Body:       "Error executing template: " + err.Error(),
 		}, nil
 	}
 
