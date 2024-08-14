@@ -13,7 +13,7 @@ import (
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	// Check if the file exists
-	templatePath := "static/print-resume.html"
+	templatePath := "public/static/print-resume.html"
 	_, err := os.Stat(templatePath)
 	if os.IsNotExist(err) {
 		errorMsg := fmt.Sprintf("Template file not found: %s", templatePath)
