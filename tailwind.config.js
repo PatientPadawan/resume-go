@@ -28,5 +28,21 @@ module.exports = {
     },
   },
   darkMode: "class",
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/typography"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".details-reset": {
+          "& summary": {
+            "list-style": "none",
+            "&::-webkit-details-marker": {
+              display: "none",
+            },
+          },
+        },
+      };
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };
