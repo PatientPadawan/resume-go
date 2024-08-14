@@ -7,7 +7,7 @@
     make build-netlify
     cp -r static public/
     mkdir -p functions/static
-    cp static/Print-resume.html functions/static/
+    cp static/print-resume.html functions/static
     cp static/favicon.ico public/favicon.ico
     go get github.com/aws/aws-lambda-go/events
     go get github.com/aws/aws-lambda-go/lambda
@@ -17,6 +17,6 @@
   functions = "functions"
 
 [[redirects]]
-  from = "/api/print"
+  from = "/print"
   to = "/.netlify/functions/print"
   status = 200
